@@ -1,6 +1,7 @@
 package proto
 
 import (
+	"strconv"
 	"sync"
 
 	"github.com/goccy/go-json"
@@ -146,7 +147,7 @@ func (c *Codec) packMessage(msg *internal.Message, ctx *internal.Context, protoM
 	protoMsg.Failure = msg.Failure
 	protoMsg.Header = msg.Header
 	protoMsg.HistoryLength = int64(ctx.HistoryLen)
-	protoMsg.RunId = ctx.RrID
+	protoMsg.RunId = ctx.RrID + ":" + strconv.Itoa(ctx.WorkerPID)
 	// new fields
 	protoMsg.TaskQueue = ctx.TaskQueue
 	protoMsg.TickTime = ctx.TickTime

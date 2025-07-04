@@ -49,6 +49,9 @@ type Workflow struct {
 	pool  common.Pool
 	rrID  string
 
+	// WorkerPID is the PID of the worker that executes this workflow.
+	WorkerPID int
+
 	// LocalActivityFn
 	la LaFn
 
@@ -87,6 +90,7 @@ func NewWorkflowDefinition(codec common.Codec, la LaFn, pool common.Pool, log *z
 				return new(payload.Payload)
 			},
 		},
+		WorkerPID: int(pool.Workers()[0].Pid()),
 	}
 }
 
@@ -111,6 +115,8 @@ func (wp *Workflow) NewWorkflowDefinition() bindings.WorkflowDefinition {
 				return new(payload.Payload)
 			},
 		},
+		// WorkerPID is the PID of the worker that executes this workflow.
+		WorkerPID: wp.WorkerPID,
 	}
 }
 

@@ -89,6 +89,9 @@ type Context struct {
 	// and it is suggested.
 	// This value may change throughout the life of the workflow.
 	ContinueAsNewSuggested bool `json:"continue_as_new_suggested"`
+	// WorkerPID contains the PID of the worker that sent this request.
+	// Used to prevent race conditions when workers are restarted.
+	WorkerPID int `json:"worker_pid"`
 }
 
 // Message used to exchange the send commands and receive responses from underlying workers.

@@ -34,6 +34,7 @@ func (wp *Workflow) getContext() *internal.Context {
 		HistorySize:            wp.env.WorkflowInfo().GetCurrentHistorySize(),
 		ContinueAsNewSuggested: wp.env.WorkflowInfo().GetContinueAsNewSuggested(),
 		RrID:                   wp.rrID,
+		WorkerPID: 			    wp.WorkerPID,
 	}
 }
 
